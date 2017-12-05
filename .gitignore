@@ -1,9 +1,11 @@
 build
 target
 
-.gradle
+.mvn
 .idea
 
+mvnw
+mvnw.com
 *.class
 *.iml
 *.log
