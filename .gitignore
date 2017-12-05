@@ -5,7 +5,7 @@ target
 .idea
 
 mvnw
-mvnw.com
+mvnw.cmd
 *.class
 *.iml
 *.log
