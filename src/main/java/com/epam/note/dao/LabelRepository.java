@@ -1,6 +1,6 @@
-package dao;
+package com.epam.note.dao;
 
-import model.LabelEntity;
+import com.epam.note.model.LabelEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

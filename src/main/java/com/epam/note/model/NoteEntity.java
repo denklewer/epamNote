@@ -1,4 +1,4 @@
-package model;
+package com.epam.note.model;
 
 import lombok.Data;
 
