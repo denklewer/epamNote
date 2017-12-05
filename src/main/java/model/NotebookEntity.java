@@ -13,4 +13,7 @@ public class NotebookEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @ManyToOne
+    @JoinColumn(name = "note_id", referencedColumnName = "id", nullable = false)
+    private NoteEntity note;
 }

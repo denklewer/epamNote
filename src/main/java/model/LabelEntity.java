@@ -13,4 +13,8 @@ public class LabelEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Basic
+    @Column(name = "value", nullable = false, length = -1)
+    private String value;
 }
