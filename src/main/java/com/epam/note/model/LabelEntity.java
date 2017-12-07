@@ -15,6 +15,10 @@ public class LabelEntity {
     private int id;
 
     @Basic
-    @Column(name = "value", nullable = false, length = -1)
+    @Column(name = "value", nullable = false)
     private String value;
+
+    @ManyToOne
+    @JoinColumn(name = "note_id", referencedColumnName = "id", nullable = false)
+    private NoteEntity note;
 }

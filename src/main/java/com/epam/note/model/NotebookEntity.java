@@ -14,10 +14,10 @@ public class NotebookEntity {
     private int id;
 
     @Basic
-    @Column(name = "caption", nullable = false, length = -1)
+    @Column(name = "caption", nullable = false)
     private String caption;
 
     @ManyToOne
-    @JoinColumn(name = "note_id", referencedColumnName = "id", nullable = false)
-    private NoteEntity note;
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private UserEntity user;
 }

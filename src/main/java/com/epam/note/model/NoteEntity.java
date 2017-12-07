@@ -1,6 +1,7 @@
 package com.epam.note.model;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -14,14 +15,15 @@ public class NoteEntity {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "label_id", referencedColumnName = "id", nullable = false)
-    private LabelEntity label;
+    @JoinColumn(name = "notebook_id", referencedColumnName = "id", nullable = false)
+    private NotebookEntity notebook;
 
     @Basic
-    @Column(name = "caption", nullable = false, length = -1)
+    @Column(name = "caption", nullable = false)
     private String caption;
 
     @Basic
-    @Column(name = "text", nullable = false, length = -1)
+    @Column(name = "text", nullable = false)
+    @Type(type="text")
     private String text;
 }

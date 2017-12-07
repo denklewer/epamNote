@@ -1,9 +1,10 @@
 package com.epam.note.dao;
 
+import com.epam.note.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserRepository,Integer> {
+public interface UserRepository extends JpaRepository<UserEntity,Integer> {
 
 }
