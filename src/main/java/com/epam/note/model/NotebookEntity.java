@@ -3,6 +3,7 @@ package com.epam.note.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "notebook")
@@ -20,4 +21,8 @@ public class NotebookEntity {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private UserEntity user;
+
+    @OneToMany
+    private Set<NoteEntity> notes;
+
 }

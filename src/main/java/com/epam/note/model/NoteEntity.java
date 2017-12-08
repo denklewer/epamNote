@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "note")
@@ -17,6 +18,9 @@ public class NoteEntity {
     @ManyToOne
     @JoinColumn(name = "notebook_id", referencedColumnName = "id", nullable = false)
     private NotebookEntity notebook;
+
+    @OneToMany
+    private Set<LabelEntity> labels;
 
     @Basic
     @Column(name = "caption", nullable = false)

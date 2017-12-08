@@ -33,11 +33,9 @@ public class DaoTest {
     @Autowired
     private LabelRepository labelRepository;
 
-    private ConfigurableApplicationContext ctx;
-
     @Before
     public void initAndSave(){
-        ctx = new ClassPathXmlApplicationContext("classpath:DataBeans.xml");
+        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:DataBeans.xml");
         userRepository.save(ctx.getBean(UserEntity.class));
         notebookRepository.save(ctx.getBean(NotebookEntity.class));
         noteRepository.save(ctx.getBean(NoteEntity.class));

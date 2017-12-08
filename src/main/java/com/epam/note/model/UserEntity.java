@@ -3,6 +3,7 @@ package com.epam.note.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -12,6 +13,9 @@ public class UserEntity {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @OneToMany
+    private Set<NotebookEntity> notebooks;
 
     @Basic
     @Column(name = "login", nullable = false)
