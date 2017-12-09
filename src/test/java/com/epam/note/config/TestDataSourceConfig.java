@@ -6,22 +6,23 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Profile("dev")
-//@PropertySource("db.properties")
 @Configuration
+@PropertySource({"classpath:db.properties"})
 public class TestDataSourceConfig implements DataConfig {
-    @Value("org.h2.Driver")
+    @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
-    @Value("jdbc:h2:file:~/test")
+    @Value("${spring.datasource.url}")
     private String url;
-    @Value("sa")
+    @Value("${spring.datasource.username}")
     private String username;
-    @Value("")
+    @Value("${spring.datasource.password}")
     private String password;
 
     @Bean

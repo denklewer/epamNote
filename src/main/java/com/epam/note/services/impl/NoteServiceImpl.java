@@ -8,11 +8,13 @@ import com.epam.note.model.NoteEntity;
 import com.epam.note.model.NotebookEntity;
 import com.epam.note.services.interafaces.NoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 
 @RequiredArgsConstructor
+@Service
 public class NoteServiceImpl implements NoteService {
     private final NoteRepository noteRepository;
     private final NotebookRepository notebookRepository;

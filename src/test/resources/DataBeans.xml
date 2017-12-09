@@ -15,8 +15,8 @@
     </bean>
 
     <bean id="note" class="com.epam.note.model.NoteEntity">
-        <property name="notebook" ref="notebook"/>
         <property name="caption" value="BasicNote"/>
+        <property name="notebook" ref="notebook"/>
         <property name="text" value="Котики правят миром"/>
     </bean>
 

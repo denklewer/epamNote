@@ -6,8 +6,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.epam.note.config", "com.epam.note.dao", "com.epam.note.services.impl",
-        "com.epam.note.init"})
+@ComponentScan(basePackages = {"com.epam.note.config", "com.epam.note.dao", "com.epam.note.services.impl"})
 public class ApplicationConfig {
 
 }
