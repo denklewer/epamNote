@@ -47,6 +47,7 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public List<NoteEntity> getNotesByLabelId(int labelId) {
-        return noteRepository.findAllByLabelsId(labelId);
+        return labelRepository.findNotesById(labelId);
+        //return noteRepository.findAllByLabelsId(labelId);
     }
 }

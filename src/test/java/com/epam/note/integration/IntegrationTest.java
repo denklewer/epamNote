@@ -26,7 +26,7 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration(classes = ApplicationConfig.class)
 @ActiveProfiles("dev")
 public class IntegrationTest {
-    ConfigurableApplicationContext ctx;
+    private ConfigurableApplicationContext ctx;
 
     @Autowired
     private UserRepository userRepository;
@@ -58,12 +58,12 @@ public class IntegrationTest {
 
     @Test
     public void getAllLabels() {
-        assertTrue(noteService.getAllLabels(userId).size() > 0);
+        assertTrue(noteService.getAllLabels(ctx.getBean(UserEntity.class).getId()).size() > 0);
     }
 
     @Test
     public void getNotebooks() {
-        assertTrue(noteService.getNotebooks(userId).size() > 0);
+        assertTrue(noteService.getNotebooks(ctx.getBean(UserEntity.class).getId()).size() > 0);
     }
 
     @Test

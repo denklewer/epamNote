@@ -19,7 +19,7 @@ public class NoteEntity {
     @JoinColumn(name = "notebook_id", referencedColumnName = "id", nullable = false)
     private NotebookEntity notebook;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<LabelEntity> labels;
 
     @Basic
