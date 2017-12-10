@@ -16,12 +16,16 @@ import java.util.Properties;
 @Configuration
 @PropertySource({"classpath:db.properties"})
 public class TestDataSourceConfig implements DataConfig {
+
     @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
+
     @Value("${spring.datasource.url}")
     private String url;
+
     @Value("${spring.datasource.username}")
     private String username;
+
     @Value("${spring.datasource.password}")
     private String password;
 
