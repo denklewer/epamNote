@@ -18,7 +18,7 @@ public class NoteEntity {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "notebook_id", referencedColumnName = "id", nullable = false)

@@ -26,7 +26,7 @@ public class LabelEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @Basic
     @Column(name = "value")

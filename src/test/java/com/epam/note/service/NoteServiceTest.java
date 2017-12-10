@@ -6,8 +6,12 @@ import com.epam.note.dao.NoteRepository;
 import com.epam.note.dao.NotebookRepository;
 import com.epam.note.model.NoteEntity;
 import com.epam.note.model.NotebookEntity;
+import com.epam.note.services.impl.LabelServiceImpl;
 import com.epam.note.services.impl.NoteServiceImpl;
+import com.epam.note.services.impl.NotebookServiceImpl;
+import com.epam.note.services.interafaces.LabelService;
 import com.epam.note.services.interafaces.NoteService;
+import com.epam.note.services.interafaces.NotebookService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +31,9 @@ import static org.mockito.Mockito.*;
 public class NoteServiceTest {
     private ConfigurableApplicationContext ctx;
     private NoteService noteService;
-    private int someInt = 1;
+    private NotebookService notebookService;
+    private LabelService labelService;
+    private long someLong = 1;
 
     @Mock
     private LabelRepository labelRepository;
@@ -41,42 +47,44 @@ public class NoteServiceTest {
     @Before
     public void before() {
         ctx = new ClassPathXmlApplicationContext("classpath:DataBeans.xml");
-        noteService = new NoteServiceImpl(noteRepository, notebookRepository, labelRepository);
+        noteService=new NoteServiceImpl(noteRepository);
+        notebookService=new NotebookServiceImpl(notebookRepository);
+        labelService=new LabelServiceImpl(labelRepository);
     }
 
     @Test
     public void getAllLabels() {
-        noteService.getAllLabels(someInt);
-        verify(labelRepository, times(1)).findAllByNoteNotebookUserId(anyInt());
+        labelService.getAllLabels();
+        verify(labelRepository, times(1)).findAll();
     }
 
     @Test
     public void getNotebooks() {
-        noteService.getNotebooks(someInt);
-        verify(notebookRepository, times(1)).findAllByUserId(anyInt());
+        notebookService.getAllNotebooks();
+        verify(notebookRepository, times(1)).findAll();
     }
 
     @Test
     public void getNotes() {
-        noteService.getNotes(someInt);
-        verify(noteRepository, times(1)).findAllByNotebookId(anyInt());
+        noteService.getAllNotes();
+        verify(noteRepository, times(1)).findAll();
     }
 
     @Test
     public void getNotesByLabelId() {
-        noteService.getNotesByLabelId(someInt);
-        //verify(noteRepository, times(1)).findAllByLabelsId(anyInt());
+        noteService.findAllByNotebookId(someLong);
+        verify(noteRepository, times(1)).findAllByNotebookId(anyInt());
     }
 
     @Test
     public void saveNote() {
-        noteService.saveNote(ctx.getBean(NoteEntity.class));
+        noteService.createNote(ctx.getBean(NoteEntity.class));
         verify(noteRepository, times(1)).save(anyObject());
     }
 
     @Test
     public void saveNotebook() {
-        noteService.saveNotebook(ctx.getBean(NotebookEntity.class));
+        notebookService.createNotebook(ctx.getBean(NotebookEntity.class));
         verify(notebookRepository, times(1)).save(anyObject());
     }
 

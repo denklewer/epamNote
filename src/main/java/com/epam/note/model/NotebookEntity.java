@@ -29,7 +29,7 @@ public class NotebookEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @Basic
     @NonNull

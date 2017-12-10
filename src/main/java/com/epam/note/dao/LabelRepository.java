@@ -10,12 +10,10 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
-public interface LabelRepository extends JpaRepository<LabelEntity, Integer> {
+public interface LabelRepository extends JpaRepository<LabelEntity, Long> {
     Set<LabelEntity> findAllByNoteNotebookUserId(int userId);
 
     @Query("select L.note from LabelEntity L where L.id = ?1")
-    List<NoteEntity> findNotesById(int labelId);
+    List<NoteEntity> findNotesById(long labelId);
 
-    @Override
-    void deleteById(Integer integer);
 }

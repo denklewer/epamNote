@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface NotebookRepository extends JpaRepository<NotebookEntity,Integer> {
-    List<NotebookEntity> findAllByUserId(int userId);
+public interface NotebookRepository extends JpaRepository<NotebookEntity, Long> {
+
+  List<NotebookEntity> findAllByUserId(long userId);
 }

@@ -9,7 +9,9 @@ import com.epam.note.model.LabelEntity;
 import com.epam.note.model.NoteEntity;
 import com.epam.note.model.NotebookEntity;
 import com.epam.note.model.UserEntity;
+import com.epam.note.services.interafaces.LabelService;
 import com.epam.note.services.interafaces.NoteService;
+import com.epam.note.services.interafaces.NotebookService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +47,17 @@ public class IntegrationTest {
   @Autowired
   private NoteService noteService;
 
-  private int userId;
+  @Autowired
+  private LabelService labelService;
+
+  @Autowired
+  private NotebookService notebookService;
+
+  private long userId;
+  private NotebookEntity saveNotebookEntity;
+  private UserEntity saveUserEntity;
+  private NoteEntity saveNoteEntity;
+  private LabelEntity saveLabelEntity;
 
   @Before
   public void initAndSave() {
@@ -53,37 +65,37 @@ public class IntegrationTest {
     userId = ctx.getBean(UserEntity.class)
                 .getId();
 
-    userRepository.save(ctx.getBean(UserEntity.class));
-    notebookRepository.save(ctx.getBean(NotebookEntity.class));
-    noteRepository.save(ctx.getBean(NoteEntity.class));
-    labelRepository.save(ctx.getBean(LabelEntity.class));
+    saveUserEntity = userRepository.save(ctx.getBean(UserEntity.class));
+    saveNotebookEntity = notebookRepository.save(ctx.getBean(NotebookEntity.class));
+    saveNoteEntity = noteRepository.save(ctx.getBean(NoteEntity.class));
+    saveLabelEntity = labelRepository.save(ctx.getBean(LabelEntity.class));
   }
 
   @Test
   public void getAllLabels() {
-    assertTrue(noteService.getAllLabels(ctx.getBean(UserEntity.class)
-                                           .getId())
-                          .size() > 0);
+    assertThat(labelService.getAllLabels()
+                           .size() > 0).isTrue();
+    assertThat(labelService.getLabelById(saveLabelEntity.getId())).isNotEqualTo(null);
   }
 
   @Test
   public void getNotebooks() {
-    assertTrue(noteService.getNotebooks(ctx.getBean(UserEntity.class)
-                                           .getId())
-                          .size() > 0);
+    assertThat(notebookService.getAllNotebooks()
+                             .size() > 0).isTrue();
+    assertThat(notebookService.getNotebookById(saveNotebookEntity.getId())).isNotEqualTo(null);
   }
 
   @Test
   public void getNotes() {
-    assertTrue(noteService.getNotes(ctx.getBean(NotebookEntity.class)
-                                       .getId())
-                          .size() > 0);
+
+    assertThat(labelService.getAllLabels()
+                           .size() > 0).isTrue();
+    assertThat(labelService.getLabelById(saveLabelEntity.getId())).isNotEqualTo(null);
   }
 
   @Test
   public void getNotesByLabelId() {
-    assertTrue(noteService.getNotesByLabelId(ctx.getBean(LabelEntity.class)
-                                                .getId())
+    assertTrue(labelService.findNotesById(saveLabelEntity.getId())
                           .size() > 0);
   }
 
@@ -96,7 +108,7 @@ public class IntegrationTest {
                                 .text("Test text")
                                 .notebook(notebookEntity)
                                 .build();
-    noteService.saveNote(note);
+    noteService.createNote(note);
     assertThat(noteRepository.findAll()
                              .stream()
                              .anyMatch(n -> n.getCaption()
@@ -111,7 +123,7 @@ public class IntegrationTest {
                                             .caption(caption)
                                             .user(userEntity)
                                             .build();
-    noteService.saveNotebook(notebook);
+    notebookService.createNotebook(notebook);
     assertThat(notebookRepository.findAll()
                                  .stream()
                                  .anyMatch(n -> n.getCaption()

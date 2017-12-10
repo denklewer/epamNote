@@ -1,54 +1,52 @@
 package com.epam.note.services.impl;
 
-import com.epam.note.dao.LabelRepository;
 import com.epam.note.dao.NoteRepository;
-import com.epam.note.dao.NotebookRepository;
-import com.epam.note.model.LabelEntity;
 import com.epam.note.model.NoteEntity;
-import com.epam.note.model.NotebookEntity;
 import com.epam.note.services.interafaces.NoteService;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Set;
 
-@RequiredArgsConstructor
 @Service
+@AllArgsConstructor
 public class NoteServiceImpl implements NoteService {
-    private final NoteRepository noteRepository;
-    private final NotebookRepository notebookRepository;
-    private final LabelRepository labelRepository;
 
-    @Override
-    public List<NotebookEntity> getNotebooks(int userId) {
-        return notebookRepository.findAllByUserId(userId);
+  private final NoteRepository noteRepository;
+
+  @Override
+  public void createNote(NoteEntity noteEntity) {
+    noteRepository.save(noteEntity);
+  }
+
+  @Override
+  public void updateNote(NoteEntity noteEntity) {
+    if (noteRepository.existsById(noteEntity.getId())) {
+      noteRepository.save(noteEntity);
     }
+  }
 
-    @Override
-    public void saveNotebook(NotebookEntity noteBook) {
-        notebookRepository.save(noteBook);
-    }
+  @Override
+  public void deleteNote(NoteEntity noteEntity) {
+    noteRepository.delete(noteEntity);
+  }
 
-    @Override
-    public List<NoteEntity> getNotes(int notebookId) {
-        return noteRepository.findAllByNotebookId(notebookId);
-    }
+  @Override
+  public void deleteNoteById(Long id) {
+    noteRepository.deleteById(id);
+  }
 
-    @Override
-    public void saveNote(NoteEntity noteEntity) {
-        noteRepository.save(noteEntity);
-    }
+  @Override
+  public NoteEntity getNoteById(Long id) {
+    return noteRepository.findById(id).get();
+  }
 
-    @Override
-    public Set<LabelEntity> getAllLabels(int userId) {
-        return labelRepository.findAllByNoteNotebookUserId(userId);
-    }
+  @Override
+  public List<NoteEntity> getAllNotes() {
+    return noteRepository.findAll();
+  }
 
-    @Override
-    public List<NoteEntity> getNotesByLabelId(int labelId) {
-        return labelRepository.findNotesById(labelId);
-        //return noteRepository.findAllByLabelsId(labelId);
-    }
-
+  public List<NoteEntity> findAllByNotebookId(long notebookId){
+   return noteRepository.findAllByNotebookId(notebookId);
+  }
 }
