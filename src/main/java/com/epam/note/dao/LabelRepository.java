@@ -15,4 +15,7 @@ public interface LabelRepository extends JpaRepository<LabelEntity, Integer> {
 
     @Query("select L.note from LabelEntity L where L.id = ?1")
     List<NoteEntity> findNotesById(int labelId);
+
+    @Override
+    void deleteById(Integer integer);
 }

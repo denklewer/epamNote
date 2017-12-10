@@ -20,83 +20,102 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationConfig.class)
 @ActiveProfiles("dev")
 public class IntegrationTest {
-    private ConfigurableApplicationContext ctx;
 
-    @Autowired
-    private UserRepository userRepository;
+  private ConfigurableApplicationContext ctx;
 
-    @Autowired
-    private NotebookRepository notebookRepository;
+  @Autowired
+  private UserRepository userRepository;
 
-    @Autowired
-    private NoteRepository noteRepository;
+  @Autowired
+  private NotebookRepository notebookRepository;
 
-    @Autowired
-    private LabelRepository labelRepository;
+  @Autowired
+  private NoteRepository noteRepository;
 
-    @Autowired
-    private NoteService noteService;
+  @Autowired
+  private LabelRepository labelRepository;
 
-    private int userId;
+  @Autowired
+  private NoteService noteService;
 
-    @Before
-    public void initAndSave(){
-        ctx = new ClassPathXmlApplicationContext("classpath:DataBeans.xml");
-        userId = ctx.getBean(UserEntity.class).getId();
+  private int userId;
 
-        userRepository.save(ctx.getBean(UserEntity.class));
-        notebookRepository.save(ctx.getBean(NotebookEntity.class));
-        noteRepository.save(ctx.getBean(NoteEntity.class));
-        labelRepository.save(ctx.getBean(LabelEntity.class));
-    }
+  @Before
+  public void initAndSave() {
+    ctx = new ClassPathXmlApplicationContext("classpath:DataBeans.xml");
+    userId = ctx.getBean(UserEntity.class)
+                .getId();
 
-    @Test
-    public void getAllLabels() {
-        assertTrue(noteService.getAllLabels(ctx.getBean(UserEntity.class).getId()).size() > 0);
-    }
+    userRepository.save(ctx.getBean(UserEntity.class));
+    notebookRepository.save(ctx.getBean(NotebookEntity.class));
+    noteRepository.save(ctx.getBean(NoteEntity.class));
+    labelRepository.save(ctx.getBean(LabelEntity.class));
+  }
 
-    @Test
-    public void getNotebooks() {
-        assertTrue(noteService.getNotebooks(ctx.getBean(UserEntity.class).getId()).size() > 0);
-    }
+  @Test
+  public void getAllLabels() {
+    assertTrue(noteService.getAllLabels(ctx.getBean(UserEntity.class)
+                                           .getId())
+                          .size() > 0);
+  }
 
-    @Test
-    public void getNotes() {
-        assertTrue(noteService.getNotes(ctx.getBean(NotebookEntity.class).getId()).size() > 0);
-    }
+  @Test
+  public void getNotebooks() {
+    assertTrue(noteService.getNotebooks(ctx.getBean(UserEntity.class)
+                                           .getId())
+                          .size() > 0);
+  }
 
-    @Test
-    public void getNotesByLabelId() {
-        assertTrue(noteService.getNotesByLabelId(ctx.getBean(LabelEntity.class).getId()).size() > 0);
-    }
+  @Test
+  public void getNotes() {
+    assertTrue(noteService.getNotes(ctx.getBean(NotebookEntity.class)
+                                       .getId())
+                          .size() > 0);
+  }
 
-    @Test
-    public void saveNote() {
-        NoteEntity note = new NoteEntity();
-        note.setCaption("TestNote");
-        note.setNotebook(ctx.getBean(NotebookEntity.class));
-        note.setText("");
-        noteService.saveNote(note);
-        assertTrue(noteRepository.findAll()
-                .stream()
-                .anyMatch(n -> n.getCaption().equals(note.getCaption())));
-    }
+  @Test
+  public void getNotesByLabelId() {
+    assertTrue(noteService.getNotesByLabelId(ctx.getBean(LabelEntity.class)
+                                                .getId())
+                          .size() > 0);
+  }
 
-    @Test
-    public void saveNotebook() {
-        NotebookEntity notebook = new NotebookEntity();
-        notebook.setCaption("TestNotebook");
-        notebook.setUser(ctx.getBean(UserEntity.class));
-        noteService.saveNotebook(notebook);
-        assertTrue(notebookRepository.findAll()
-                .stream()
-                .anyMatch(n -> n.getCaption().equals(notebook.getCaption())));
-    }
+  @Test
+  public void saveNote() {
+    String caption = "TestNote";
+    NotebookEntity notebookEntity = ctx.getBean(NotebookEntity.class);
+    NoteEntity note = NoteEntity.builder()
+                                .caption(caption)
+                                .text("Test text")
+                                .notebook(notebookEntity)
+                                .build();
+    noteService.saveNote(note);
+    assertThat(noteRepository.findAll()
+                             .stream()
+                             .anyMatch(n -> n.getCaption()
+                                             .equals(note.getCaption()))).isTrue();
+  }
+
+  @Test
+  public void saveNotebook() {
+    String caption = "TestNotebook";
+    UserEntity userEntity = ctx.getBean(UserEntity.class);
+    NotebookEntity notebook = NotebookEntity.builder()
+                                            .caption(caption)
+                                            .user(userEntity)
+                                            .build();
+    noteService.saveNotebook(notebook);
+    assertThat(notebookRepository.findAll()
+                                 .stream()
+                                 .anyMatch(n -> n.getCaption()
+                                                 .equals(notebook.getCaption()))).isTrue();
+  }
 
 }

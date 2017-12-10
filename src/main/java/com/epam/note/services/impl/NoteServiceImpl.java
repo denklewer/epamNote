@@ -50,4 +50,5 @@ public class NoteServiceImpl implements NoteService {
         return labelRepository.findNotesById(labelId);
         //return noteRepository.findAllByLabelsId(labelId);
     }
+
 }

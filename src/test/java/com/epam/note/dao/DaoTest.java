@@ -7,6 +7,7 @@ import com.epam.note.model.NotebookEntity;
 import com.epam.note.model.UserEntity;
 import org.junit.Before;
 import org.junit.Test;
+import static org.assertj.core.api.Assertions.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -15,12 +16,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationConfig.class)
 @ActiveProfiles("dev")
 public class DaoTest {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -44,21 +45,21 @@ public class DaoTest {
 
     @Test
     public void  getUsers() {
-        assertTrue(userRepository.findAll().size() > 0);
+        assertThat(userRepository.findAll().size() > 0).isTrue();
     }
 
     @Test
     public void  getNotebooks() {
-        assertTrue(notebookRepository.findAll().size() > 0);
+        assertThat(notebookRepository.findAll().size() > 0).isTrue();
     }
 
     @Test
     public void  getNotes() {
-        assertTrue(noteRepository.findAll().size() > 0);
+        assertThat(noteRepository.findAll().size() > 0).isTrue();
     }
 
     @Test
     public void  getLabels() {
-        assertTrue(labelRepository.findAll().size() > 0);
+        assertThat(labelRepository.findAll().size() > 0).isTrue();
     }
 }
