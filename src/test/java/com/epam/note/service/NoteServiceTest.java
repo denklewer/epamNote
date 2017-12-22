@@ -1,6 +1,5 @@
 package com.epam.note.service;
 
-import com.epam.note.config.ApplicationConfig;
 import com.epam.note.dao.LabelRepository;
 import com.epam.note.dao.NoteRepository;
 import com.epam.note.dao.NotebookRepository;
@@ -20,13 +19,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-@ContextConfiguration(classes = ApplicationConfig.class)
 @ActiveProfiles("dev")
 public class NoteServiceTest {
     private ConfigurableApplicationContext ctx;
@@ -79,13 +76,13 @@ public class NoteServiceTest {
     @Test
     public void saveNote() {
         noteService.createNote(ctx.getBean(NoteEntity.class));
-        verify(noteRepository, times(1)).save(anyObject());
+        verify(noteRepository, times(1)).save(ctx.getBean(NoteEntity.class));
     }
 
     @Test
     public void saveNotebook() {
         notebookService.createNotebook(ctx.getBean(NotebookEntity.class));
-        verify(notebookRepository, times(1)).save(anyObject());
+        verify(notebookRepository, times(1)).save(ctx.getBean(NotebookEntity.class));
     }
 
 

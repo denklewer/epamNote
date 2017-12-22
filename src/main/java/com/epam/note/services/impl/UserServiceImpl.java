@@ -3,9 +3,10 @@ package com.epam.note.services.impl;
 import com.epam.note.dao.UserRepository;
 import com.epam.note.model.UserEntity;
 import com.epam.note.services.interafaces.UserService;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void updateUser(UserEntity user) {
-    if (userRepository.existsById(user.getId())) {
+    if (userRepository.exists(user.getId())) {
       userRepository.save(user);
     }
   }
@@ -32,12 +33,12 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void deleteUserlById(Long id) {
-    userRepository.deleteById(id);
+    userRepository.delete(id);
   }
 
   @Override
   public UserEntity getUserById(Long id) {
-    return userRepository.findById(id).get();
+    return userRepository.findOne(id);
   }
 
   @Override

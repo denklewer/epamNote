@@ -1,8 +1,11 @@
 package com.epam.note;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Application {
     public static void main(String[] args) {
-        Application app = new Application();
+        SpringApplication.run(Application.class, args);
     }
 }

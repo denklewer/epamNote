@@ -1,6 +1,5 @@
 package com.epam.note.integration;
 
-import com.epam.note.config.ApplicationConfig;
 import com.epam.note.dao.LabelRepository;
 import com.epam.note.dao.NoteRepository;
 import com.epam.note.dao.NotebookRepository;
@@ -19,14 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ApplicationConfig.class)
 @ActiveProfiles("dev")
 public class IntegrationTest {
 

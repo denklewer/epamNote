@@ -3,9 +3,10 @@ package com.epam.note.services.impl;
 import com.epam.note.dao.NotebookRepository;
 import com.epam.note.model.NotebookEntity;
 import com.epam.note.services.interafaces.NotebookService;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class NotebookServiceImpl implements NotebookService {
 
   @Override
   public void updateNotebook(NotebookEntity noteBook) {
-    if (notebookRepository.existsById(noteBook.getId())) {
+    if (notebookRepository.exists(noteBook.getId())) {
       notebookRepository.save(noteBook);
     }
   }
@@ -32,12 +33,12 @@ public class NotebookServiceImpl implements NotebookService {
 
   @Override
   public void deleteNotebookById(Long id) {
-    notebookRepository.deleteById(id);
+    notebookRepository.delete(id);
   }
 
   @Override
   public NotebookEntity getNotebookById(Long id) {
-    return notebookRepository.findById(id).get();
+    return notebookRepository.findOne(id);
   }
 
   @Override

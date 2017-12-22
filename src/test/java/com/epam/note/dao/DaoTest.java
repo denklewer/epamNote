@@ -1,24 +1,22 @@
 package com.epam.note.dao;
 
-import com.epam.note.config.ApplicationConfig;
 import com.epam.note.model.LabelEntity;
 import com.epam.note.model.NoteEntity;
 import com.epam.note.model.NotebookEntity;
 import com.epam.note.model.UserEntity;
 import org.junit.Before;
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.assertj.core.api.Assertions.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ApplicationConfig.class)
 @ActiveProfiles("dev")
 public class DaoTest {
 

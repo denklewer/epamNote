@@ -4,10 +4,11 @@ import com.epam.note.dao.LabelRepository;
 import com.epam.note.model.LabelEntity;
 import com.epam.note.model.NoteEntity;
 import com.epam.note.services.interafaces.LabelService;
-import java.util.List;
-import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -22,7 +23,7 @@ public class LabelServiceImpl implements LabelService {
 
   @Override
   public void updateLabel(LabelEntity labelEntity) {
-    if (labelRepository.existsById(labelEntity.getId())) {
+    if (labelRepository.exists(labelEntity.getId())) {
       labelRepository.save(labelEntity);
     }
   }
@@ -34,12 +35,12 @@ public class LabelServiceImpl implements LabelService {
 
   @Override
   public void deleteLabelById(Long id) {
-    labelRepository.deleteById(id);
+    labelRepository.delete(id);
   }
 
   @Override
   public LabelEntity getLabelById(Long id) {
-    return labelRepository.findById(id).get();
+    return labelRepository.findOne(id);
   }
 
   @Override

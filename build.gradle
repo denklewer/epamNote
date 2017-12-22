@@ -1,31 +1,57 @@
-group 'com.epam.note'
-version '1.0-SNAPSHOT'
+buildscript {
+    ext {
+        springBootVersion = '1.5.9.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
 
 apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
 
+group 'com.epam.note'
+version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    vaadinVersion = '8.1.0'
+}
+
 dependencies {
     compileOnly(
-            'org.projectlombok:lombok:1.16.18'
+            "org.projectlombok:lombok:${lombokVersion}"
     )
 
     testCompile(
             'org.springframework:spring-test:5.0.2.RELEASE',
-            'org.mockito:mockito-all:1.8.4',
-            'junit:junit:4.12',
-            'com.h2database:h2:1.4.196',
-            'org.assertj:assertj-core:3.8.0'
     )
     compile(
-            'org.springframework:spring-context:5.0.2.RELEASE',
-            'org.hibernate:hibernate-core:5.2.12.Final',
-            'org.springframework.data:spring-data-jpa:2.0.2.RELEASE',
-            'org.springframework:spring-orm:3.1.1.RELEASE',
-            'com.zaxxer:HikariCP:2.4.7'
+            'org.springframework.boot:spring-boot-starter-data-jpa',
+            //'org.springframework.boot:spring-boot-starter-security',
+            'com.vaadin:vaadin-spring-boot-starter',
+            'org.springframework.boot:spring-boot-starter-web',
+
+            'com.h2database:h2:1.4.196',
+
+            //'org.springframework.data:spring-data-jpa:2.0.2.RELEASE',
+            //'com.zaxxer:HikariCP:2.4.7',
+
+            'org.springframework.boot:spring-boot-starter-web:1.5.9.RELEASE',
+            'org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE'
     )
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
+    }
 }
