@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user" class="com.epam.note.model.UserEntity">
+        <property name="login" value="JohnSnow"/>
+        <property name="password" value="123456"/>
+    </bean>
+
+    <bean id="notebook" class="com.epam.note.model.NotebookEntity">
+        <property name="caption" value="DeathNote"/>
+        <property name="user" ref="user"/>
+    </bean>
+
+    <bean id="note" class="com.epam.note.model.NoteEntity">
+        <property name="caption" value="BasicNote"/>
+        <property name="notebook" ref="notebook"/>
+        <property name="text" value="Котики правят миром"/>
+    </bean>
+
+    <bean id="label" class="com.epam.note.model.LabelEntity">
+        <property name="note" ref="note"/>
+        <property name="value" value="котики"/>
+    </bean>
+
+</beans>
