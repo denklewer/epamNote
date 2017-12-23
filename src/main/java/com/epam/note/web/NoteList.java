@@ -61,8 +61,6 @@ public class NoteList extends VerticalLayout {
         grid.setCaption(notebook.getCaption());
         grid.setItems(noteService.findAllByNotebookId(notebook.getId()));
         setVisible(true);
-
-
     }
 
     private void addNewNote() {

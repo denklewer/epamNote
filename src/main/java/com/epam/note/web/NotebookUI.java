@@ -24,7 +24,6 @@ public class NotebookUI extends UI {
 
 
     @Override
-
     protected void init(VaadinRequest request) {
         VerticalLayout notebookLayout = new VerticalLayout(actions, grid);
         HorizontalLayout mainLayout = new HorizontalLayout(notebookLayout, noteList, noteEditor);
