@@ -9,16 +9,20 @@ import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+
+import javax.annotation.PostConstruct;
 
 @SpringComponent
 @UIScope
+@RequiredArgsConstructor
 public class NoteEditor  extends VerticalLayout{
     private final NoteService noteService;
     private NoteEntity noteEntity;
 
     private TextField caption = new TextField();
     private TextArea text = new TextArea();
+    private LabelList labelList;
 
     /* Action buttons */
     private Button save = new Button("Save", VaadinIcons.ARROW_CIRCLE_DOWN);
@@ -28,10 +32,8 @@ public class NoteEditor  extends VerticalLayout{
 
     private Binder<NoteEntity> binder = new Binder<>(NoteEntity.class);
 
-    @Autowired
-    public NoteEditor(NoteService noteService) {
-        this.noteService = noteService;
-
+    @PostConstruct
+    public void init() {
         addComponents(caption, text, actions);
 
         caption.setWidth(100, Unit.PERCENTAGE);

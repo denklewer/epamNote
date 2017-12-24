@@ -15,18 +15,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 @UIScope
 public class NotebookEditor extends Window {
     private final NotebookService notebookService;
-    NotebookEntity notebookEntity;
+    private NotebookEntity notebookEntity;
 
-    TextField caption = new TextField("Caption");
+    private TextField caption = new TextField("Caption");
 
-    Button save = new Button("Save", VaadinIcons.ARROW_CIRCLE_DOWN);
-    Button cancel = new Button("Cancel");
-    Button delete = new Button("Delete", VaadinIcons.TRASH);
-    CssLayout actions = new CssLayout(save, cancel, delete);
+    private Button save = new Button("Save", VaadinIcons.ARROW_CIRCLE_DOWN);
+    private Button cancel = new Button("Cancel");
+    private Button delete = new Button("Delete", VaadinIcons.TRASH);
+    private CssLayout actions = new CssLayout(save, cancel, delete);
 
 
 
-    Binder<NotebookEntity> binder = new Binder<>(NotebookEntity.class);
+    private Binder<NotebookEntity> binder = new Binder<>(NotebookEntity.class);
 
     @Autowired
     public NotebookEditor(NotebookService notebookService) {

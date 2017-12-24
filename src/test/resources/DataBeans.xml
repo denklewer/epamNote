@@ -5,7 +5,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="user" class="com.epam.note.model.UserEntity">
-        <property name="login" value="JohnSnow"/>
+        <property name="username" value="JohnSnow"/>
         <property name="password" value="123456"/>
     </bean>
 

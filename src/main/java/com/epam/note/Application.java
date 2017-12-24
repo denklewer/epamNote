@@ -9,6 +9,7 @@ import com.epam.note.model.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.PostConstruct;
 
@@ -19,6 +20,7 @@ public class Application {
     final private NotebookRepository notebookRepository;
     final private NoteRepository noteRepository;
     final private UserRepository userRepository;
+    final private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -26,7 +28,8 @@ public class Application {
 
     @PostConstruct
     public void init() {
-        UserEntity user = UserEntity.builder().id(0).login("admin").password("password").build();
+        UserEntity user = UserEntity.builder().id(0).username("admin")
+                .password(bCryptPasswordEncoder.encode("password")).build();
         userRepository.save(user);
 
         NotebookEntity notebook = NotebookEntity.builder().caption("Notebook").user(user).build();

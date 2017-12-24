@@ -2,16 +2,17 @@ package com.epam.note.services.interafaces;
 
 import com.epam.note.model.LabelEntity;
 import com.epam.note.model.NoteEntity;
+
 import java.util.List;
 import java.util.Set;
 
 public interface LabelService {
 
-  void createLabel(LabelEntity noteBook);
+  void createLabel(LabelEntity label);
 
-  void updateLabel(LabelEntity noteBook);
+  void updateLabel(LabelEntity label);
 
-  void deleteLabel(LabelEntity noteBook);
+  void deleteLabel(LabelEntity label);
 
   void deleteLabelById(Long id);
 
