@@ -20,7 +20,7 @@ public interface LabelService {
 
   List<LabelEntity> getAllLabels();
 
-  Set<LabelEntity> findAllByNoteNotebookUserId(int userId);
+  Set<LabelEntity> findAllByNoteNotebookUserId(long userId);
 
   List<NoteEntity> findNotesById(long labelId);
 }

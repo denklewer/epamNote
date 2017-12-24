@@ -26,9 +26,9 @@ public class LoginUI extends UI {
         setContent(mainLayout);
 
         FormLayout content = new FormLayout();
-        TextField username = new TextField("Username");
+        TextField username = new TextField("Username (admin)");
         content.addComponent(username);
-        PasswordField password = new PasswordField("Password");
+        PasswordField password = new PasswordField("Password (password)");
         content.addComponent(password);
 
         Button send = new Button("Enter");
@@ -45,6 +45,4 @@ public class LoginUI extends UI {
         panel.setContent(content);
         mainLayout.setComponentAlignment(panel, Alignment.MIDDLE_CENTER);
     }
-
-
 }

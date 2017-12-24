@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Repository
 public interface LabelRepository extends JpaRepository<LabelEntity, Long> {
-    Set<LabelEntity> findAllByNoteNotebookUserId(int userId);
+    Set<LabelEntity> findAllByNoteNotebookUserId(long userId);
 
     @Query("select L.note from LabelEntity L where L.id = ?1")
     List<NoteEntity> findNotesById(long labelId);

@@ -48,7 +48,7 @@ public class LabelServiceImpl implements LabelService {
     return labelRepository.findAll();
   }
 
-  public Set<LabelEntity> findAllByNoteNotebookUserId(int userId) {
+  public Set<LabelEntity> findAllByNoteNotebookUserId(long userId) {
     return labelRepository.findAllByNoteNotebookUserId(userId);
   }
 
