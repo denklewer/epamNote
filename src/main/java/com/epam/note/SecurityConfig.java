@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
-                .accessDeniedPage("/login")
+                .accessDeniedPage("/error")
                 .and().authorizeRequests()
                 .antMatchers(
                         "/VAADIN/**",

@@ -4,6 +4,7 @@ import com.epam.note.model.NotebookEntity;
 import com.epam.note.model.UserEntity;
 import com.epam.note.services.interafaces.NotebookService;
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.ErrorHandler;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
@@ -25,6 +26,13 @@ public class NotebookUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
+        this.setErrorHandler(new ErrorHandler() {
+            @Override
+            public void error(com.vaadin.server.ErrorEvent event) {
+                getPage().setLocation("/error");
+            }
+        });
+
         VerticalLayout notebookLayout = new VerticalLayout(actions, grid);
         HorizontalLayout mainLayout = new HorizontalLayout(notebookLayout, noteList, noteEditor);
         setContent(mainLayout);
